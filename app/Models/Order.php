@@ -30,4 +30,14 @@ class Order extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function user_buyer()
+    {
+        return $this->belongsTo('App\Models\User', 'buyer_id', 'id');
+    }
+
+    public function user_freelancer()
+    {
+        return $this->belongsTo('App\Models\User', 'frelancer_id', 'id');
+    }
 }

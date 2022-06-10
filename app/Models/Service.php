@@ -31,4 +31,9 @@ class Service extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo('App\Models\User', 'users_id', 'id');
+    }
 }
