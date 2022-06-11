@@ -4,8 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderStatus extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    use SoftDeletes;
+    protected $table = 'order_status';
+
+    protected $dates =[
+        'updated_at',
+        'created_at',
+        'deleted_at',
+    ];
+
+    protected $fillable = [
+        'name',
+        'deleted_at',
+        'updated_at',
+        'created_at'
+    ];
+
+    public function order()
+    {
+        return $this->hasMany('App\Models\Order', 'order_status_id');
+    }
 }

@@ -26,4 +26,9 @@ class Tagline extends Model
         'updated_at',
         'created_at'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo('App\Model\Service', 'service_id', 'id');
+    }
 }
