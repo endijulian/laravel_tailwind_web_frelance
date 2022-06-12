@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Models\DetailUser;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -36,6 +37,15 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
                 $this->createTeam($user);
+
+                //add to detail user
+                $detail_user                    = new DetailUser;
+                $detail_user->users_id          = $user->id;
+                $detail_user->photo             = null;
+                $detail_user->role              = null;
+                $detail_user->contact_number    = null;
+                $detail_user->biography         = null;
+                $detail_user->save();
             });
         });
     }
