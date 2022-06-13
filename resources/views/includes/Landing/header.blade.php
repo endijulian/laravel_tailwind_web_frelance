@@ -26,7 +26,7 @@
 
                     @auth
                         <a href="{{ route('member.dashboard.index') }}" class="block lg:hidden nav-link text-serv-text">Dashboard</a>
-                        <a href="{{ route('logout') }}" class="block lg:hidden nav-link text-serv-text" onclick="event.preventDefault(); document.getElementById('logout-form').submit;">Logout
+                        <a href="{{ route('logout') }}" class="block lg:hidden nav-link text-serv-text" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout
 
                             <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display: none;">
                                 @csrf
