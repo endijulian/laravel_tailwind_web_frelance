@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html x-date="data()" lang="en">
+<html x-data="data()" lang="en">
     <head>
 
         @include('includes.Dashboard.meta')
