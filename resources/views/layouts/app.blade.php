@@ -30,6 +30,6 @@
 
     @stack('before-script')
         @include('includes.Dashboard.script')
-    @stack('after-style')
+    @stack('after-script')
 </body>
 </html>
