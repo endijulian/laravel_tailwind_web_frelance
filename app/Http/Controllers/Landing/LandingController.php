@@ -145,6 +145,6 @@ class LandingController extends Controller
     {
         $order  = Order::where('id', $id)->first();
 
-        return view('pages.landing.boking');
+        return view('pages.landing.boking', compact('order'));
     }
 }

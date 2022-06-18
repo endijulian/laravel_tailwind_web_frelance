@@ -6,13 +6,18 @@
         </div>
         <div class="flex items-center pt-8 pl-5 space-x-2 border-t border-gray-100">
             <!--Author's profile photo-->
-            <img class="object-cover object-center mr-1 rounded-full w-14 h-14"
-                src="https://randomuser.me/api/portraits/men/1.jpg" alt="random user" />
+
+            @if (Auth::user()->detail_user->photo != null)
+                <img class="object-cover object-center mr-1 rounded-full w-14 h-14" src="{{ Storage::url(Auth::user()->detail_user->photo) ?? '' }}" alt="random user" />
+            @else
+                <img class="object-cover object-center mr-1 rounded-full w-14 h-14" src="https://randomuser.me/api/portraits/men/1.jpg" alt="random user" />
+            @endif
+
             <div>
                 <!--Author name-->
-                <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name }}</p>
+                <p class="font-semibold text-gray-900 text-md">{{ Auth::user()->name ?? ''}}</p>
                 <p class="text-sm font-light text-serv-text">
-                    Website Developer
+                    {{ Auth::user()->detail_user->role ?? '' }}
                 </p>
             </div>
         </div>

@@ -105,7 +105,7 @@ class ProfileController extends Controller
 
         //store file to storage
         if(isset($data_detail_user['photo'])){
-            $data_detail_user   = $request_detail_user->file('photo')->store('assets/photo', 'public');
+            $data_detail_user['photo']   = $request_detail_user->file('photo')->store('assets/photo', 'public');
         }
 
         //proses save to table user
@@ -118,21 +118,20 @@ class ProfileController extends Controller
 
         //proses save to table experience user
         $experience_user_id    = ExperienceUser::where('detail_user_id', $detail_user['id'])->first();
+
         if (isset($experience_user_id)) {
             foreach($data_profile['experience'] as $key => $value){
-                    $experience_user    = ExperienceUser::find($key);
+                    $experience_user                    = ExperienceUser::find($key);
                     $experience_user->detail_user_id    = $detail_user['id'];
                     $experience_user->experience        = $value;
                     $experience_user->save();
             }
         }else{
-            if(isset($value)){
-                foreach($data_profile['experience'] as $key => $value){
-                    $experience_user    = new ExperienceUser;
-                    $experience_user->detail_user_id    = $detail_user['id'];
-                    $experience_user->experience        = $value;
-                    $experience_user->save();
-                }
+            foreach($data_profile['experience'] as $key => $value){
+                $experience_user                    = new ExperienceUser;
+                $experience_user->detail_user_id    = $detail_user['id'];
+                $experience_user->experience        = $value;
+                $experience_user->save();
             }
         }
 
@@ -151,7 +150,7 @@ class ProfileController extends Controller
         return abort(404);
     }
 
-    public function delete($id)
+    public function delete()
     {
 
         //get photo user
@@ -164,11 +163,11 @@ class ProfileController extends Controller
         $data->save();
 
         //delete file photo storage
-        $data   = '/storage'.$path_photo;
+        $data   = 'storage/'.$path_photo;
         if (File::exists($data)) {
             File::delete($data);
         } else {
-            File::delete('/storage/app/public'.$path_photo);
+            File::delete('storage/app/public/'.$path_photo);
         }
 
         toast()->success('Delete has been success');
