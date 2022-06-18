@@ -29,9 +29,9 @@ class ServiceController extends Controller
     public function index()
     {
 
-        $service    = Service::where('users_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $services    = Service::where('users_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('pages.Dashboard.service.index', compact('service'));
+        return view('pages.Dashboard.service.index', compact('services'));
     }
 
     /**
@@ -63,7 +63,7 @@ class ServiceController extends Controller
         foreach ($data['advantage-service'] as $key => $value) {
             $advantage_service              = new AdvantageService;
             $advantage_service->service_id  = $service->id;
-            $advantage_service->advantage_id= $value;
+            $advantage_service->advantage   = $value;
             $advantage_service->save();
         }
 
@@ -71,7 +71,7 @@ class ServiceController extends Controller
         foreach ($data['advantage-user'] as $key => $value) {
             $advantage_user              = new AdvantageUser;
             $advantage_user->service_id  = $service->id;
-            $advantage_user->advantage_id= $value;
+            $advantage_user->advantage   = $value;
             $advantage_user->save();
         }
 

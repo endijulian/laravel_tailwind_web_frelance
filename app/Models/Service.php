@@ -32,7 +32,7 @@ class Service extends Model
         'created_at'
     ];
 
-    public function service()
+    public function user()
     {
         return $this->belongsTo('App\Models\User', 'users_id', 'id');
     }
