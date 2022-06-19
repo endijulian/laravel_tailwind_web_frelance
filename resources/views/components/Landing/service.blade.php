@@ -1,27 +1,33 @@
-<a href="details.php" class="inline-block px-3">
+<a href="{{ route('detail.landing', $item->id) }}" class="inline-block px-3">
     <div class="w-96 h-auto overflow-hidden md:p-5 p-4 bg-white rounded-2xl inline-block">
         <div class="flex items-center space-x-2 mb-6">
             <!--Author's profile photo-->
-            <img class="w-14 h-14 object-cover object-center rounded-full mr-1"
-                src="https://randomuser.me/api/portraits/men/1.jpg" alt="random user" />
+
+            @if ($item->user->detail_user->photo != null)
+                <img class="w-14 h-14 object-cover object-center rounded-full mr-1" src="{{ Storage::url($item->user->detail_user->photo) }}" alt="image" loading="lazy">
+            @else
+                <p>No Image</p>
+            @endif
+
             <div>
                 <!--Author name-->
-                <p class="text-gray-900 font-semibold text-lg">Alex Jones</p>
+                <p class="text-gray-900 font-semibold text-lg">{{ $item->user->name ?? '' }}</p>
                 <p class="text-serv-text font-light text-md">
-                    Website Developer
+                   {{ $item->user->detail_user->role ?? '' }}
                 </p>
             </div>
         </div>
 
         <!--Banner image-->
-        <img class="rounded-2xl w-full"
-            src="https://via.placeholder.com/750x500" alt="placeholder" />
+
+            @if ($item->thumbnail_service[0]->thumbnail != null)
+                <img class="rounded-2xl w-full h-48 object-cover" src="{{ Storage::url($item->thumbnail_service[0]->thumbnail) }}" alt="image" loading="lazy">
+            @else
+                <img class="rounded-2xl w-full" src="https://via.placeholder.com/750x500" alt="placeholder" />
+            @endif
 
         <!--Title-->
-        <h1 class="font-semibold text-gray-900 text-lg mt-1 leading-normal py-4">
-            I Will Design WordPress eCommerce
-            Modules
-        </h1>
+        <h1 class="font-semibold text-gray-900 text-lg mt-1 leading-normal py-4">{{ $item->title ?? '' }}</h1>
         <!--Description-->
         <div class="max-w-full">
             @include('components.Landing.rating')
@@ -34,7 +40,7 @@
             </span>
             <span
                 class="text-serv-button inline-flex items-center leading-none text-md font-semibold">
-                Rp 120.000
+                Rp {{ number_format($item->price) ?? '' }}
             </span>
         </div>
     </div>

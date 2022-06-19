@@ -67,7 +67,13 @@
                 </div>
                 <div class="flex overflow-x-scroll pb-10 hide-scroll-bar dragscroll -mx-3">
                     <div class="flex flex-nowrap">
-                        @include('components.Landing.service')
+
+                        @forelse ($services as $item)
+                            @include('components.Landing.service')
+                        @empty
+
+                        @endforelse
+
                     </div>
 
                 </div>
@@ -78,8 +84,8 @@
         <div class="py-10 lg:py-24 flex lg:flex-row flex-col items-center cta-bg">
             <!-- Left Column -->
             <div class="w-full lg:w-1/2 text-center justify-center flex lg:mb-0 mb-12">
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-lity>
-                    <img id="hero" src="{{ asset('assets/images/video-placeholder.png') }}" alt="" class="p-5" />
+                <a href="https://www.youtube.com/watch?v=zLN6Dv6xomc" data-lity>
+                    <img src="{{ asset('assets/images/video-placeholder.png') }}" alt="" class="p-5" />
                 </a>
             </div>
             <!-- Right Column -->
