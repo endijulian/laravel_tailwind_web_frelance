@@ -40,8 +40,8 @@ class MemberController extends Controller
         return view('pages.Dashboard.index', compact(
             'orders',
             'completed',
-            'completed',
             'frelancer',
+            'progress'
         ));
     }
 
