@@ -129,6 +129,7 @@ class ServiceController extends Controller
         $with['tagline']            = $tagline;
         $with['advantage_user']     = $advantage_user;
         $with['thumbnail_service']  = $thumbnail_service;
+        $with['service']            = $service;
 
         return view('pages.Dashboard.service.edit', $with);
     }
@@ -148,31 +149,37 @@ class ServiceController extends Controller
         $service->update($data);
 
          //Update to advantage service
-        if(isset($data['advantage-service'])){
-            foreach ($data['advantage-service'] as $key => $value) {
+        if(isset($data['advantage-services'])){
+            foreach ($data['advantage-services'] as $key => $value) {
                 $advantage_service              = AdvantageService::find($key);
                 $advantage_service->advantage   = $value;
                 $advantage_service->save();
             }
-        }else{
+        }
+
+        if(isset($data['advantage-service'])){
             foreach ($data['advantage-service'] as $key => $value) {
-                $advantage_service              = AdvantageService::find($key);
+                $advantage_service              = new AdvantageService;
                 $advantage_service->service_id  = $service->id;
                 $advantage_service->advantage   = $value;
                 $advantage_service->save();
             }
         }
 
+
+
         //Update to advantage user
-        if(isset($data['advantage-user'])){
-            foreach ($data['advantage-user'] as $key => $value) {
+        if(isset($data['advantage-users'])){
+            foreach ($data['advantage-users'] as $key => $value) {
                 $advantage_user              = AdvantageUser::find($key);
                 $advantage_user->advantage   = $value;
                 $advantage_user->save();
             }
-        }else{
+        }
+
+        if(isset($data['advantage-user'])){
             foreach ($data['advantage-user'] as $key => $value) {
-                $advantage_user              = AdvantageUser::find($key);
+                $advantage_user              = new AdvantageUser;
                 $advantage_user->service_id  = $service->id;
                 $advantage_user->advantage   = $value;
                 $advantage_user->save();
@@ -181,17 +188,19 @@ class ServiceController extends Controller
 
 
         // Update tagline
-        if(isset($data['tagline'])){
-            foreach ($data['tagline'] as $key => $value) {
+        if(isset($data['taglines'])){
+            foreach ($data['taglines'] as $key => $value) {
                 $tagline              = Tagline::find($key);
-                $tagline->advantage   = $value;
+                $tagline->tagline     = $value;
                 $tagline->save();
             }
-        }else{
+        }
+
+        if(isset($data['tagline'])){
             foreach ($data['tagline'] as $key => $value) {
-                $tagline              = Tagline::find($key);
+                $tagline              = new Tagline;
                 $tagline->service_id  = $service->id;
-                $tagline->advantage   = $value;
+                $tagline->tagline     = $value;
                 $tagline->save();
             }
         }
