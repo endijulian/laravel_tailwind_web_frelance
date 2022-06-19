@@ -23,9 +23,9 @@ class RequestController extends Controller
     public function index()
     {
 
-        $order      = Order::where('buyer_id',  Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $orders      = Order::where('buyer_id',  Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('pages.Dashboard.request.index', compact('order'));
+        return view('pages.Dashboard.request.index', compact('orders'));
     }
 
     /**
