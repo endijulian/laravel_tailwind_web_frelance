@@ -22,7 +22,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $orders     = Order::Where('frelancer_id', Auth::user()->id)->get();
+        $orders     = Order::where('frelancer_id', Auth::user()->id)->get();
 
         $progress   = Order::where('frelancer_id', Auth::user()->id)
                         ->where('order_status_id', 2)

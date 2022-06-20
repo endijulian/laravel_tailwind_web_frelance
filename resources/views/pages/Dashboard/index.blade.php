@@ -100,8 +100,8 @@
 
                                             <div class="relative w-10 h-10 mr-3 rounded-full md:block">
 
-                                                @if (Auth::user()->detail_user->photo != null)
-                                                    <img class="object-cover w-full h-full rounded-full" src="{{ Storage::url(Auth::user()->detail_user->photo) }}" alt="photo profile">
+                                                @if ($order->user_buyer->detail_user->photo != null)
+                                                    <img class="object-cover w-full h-full rounded-full" src="{{ Storage::url($order->user_buyer->detail_user->photo) }}" alt="photo profile">
                                                 @else
                                                     <p>No Image</p>
                                                 @endif
@@ -123,6 +123,29 @@
 
                                             </div>
                                         </div>
+                                    </td>
+
+                                    <td class="w-1/3 px-1 py-5">
+                                        <div class="flex items-center text-sm">
+
+                                            <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+
+                                                @if ($order->service->thumbnail_service[0]->thumbnail != null)
+                                                    <img class="object-cover w-full h-full rounded-full" src="{{ Storage::url($order->service->thumbnail_service[0]->thumbnail) }}" alt="photo profile">
+                                                @else
+                                                    <p>No Image</p>
+                                                @endif
+
+                                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium text-black">{{ $order->service->title ?? '' }}</p>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-1 py-5 text-xs text-red-500">
+                                        {{ date('d m Y', strtotime($order->expired)) ?? '' }}
                                     </td>
                                 </tr>
                             @empty
