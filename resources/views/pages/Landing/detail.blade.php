@@ -46,6 +46,7 @@
 
                     </div>
                 </div>
+
                 <div class="content">
                     <div x-data="{ tab: window.location.hash ? window.location.hash.substring(1) : 'description' }" id="tab_wrapper">
                         <!-- The tabs navigation -->
@@ -151,6 +152,7 @@
 
                     </div>
                 </div>
+
             </main>
 
             <aside class="p-4 lg:col-span-4 md:col-span-12 md:pt-0">
@@ -247,16 +249,18 @@
 @endsection
 
 @push('after-script')
-    <script>
-        function gallery(){
-            return {
-                featured: 'https://source.unsplash.com/_SgRNwAVNKw/1600x900/',
-                active: 1,
-                changeThumbnail : function(url, position){
-                    this.featured = url,
-                    this.active = position,
-                }
+
+<script>
+    function gallery() {
+        return {
+            featured: 'https://source.unsplash.com/_SgRNwAVNKw/1600x900/',
+            active: 1,
+            changeThumbnail: function(url, position) {
+                this.featured = url;
+                this.active = position;
             }
         }
-    </script>
+    }
+</script>
+
 @endpush
